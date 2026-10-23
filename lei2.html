@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça a segunda lei de Newton e a relação entre força, massa e aceleração.">
+    <title>Segunda Lei: Princípio Fundamental | Física em movimento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Física <span>em movimento</span></a>
+            <nav aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="lei1.html">1ª Lei</a></li>
+                    <li><a href="lei2.html" aria-current="page">2ª Lei</a></li>
+                    <li><a href="lei3.html">3ª Lei</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container law-main">
+        <p class="breadcrumb"><a href="index.html">Início</a> / Segunda lei</p>
+        <section class="law-heading">
+            <p class="eyebrow">Lei do movimento · 02</p>
+            <h1>Princípio fundamental</h1>
+            <p>A segunda lei relaciona a força resultante aplicada a um corpo com sua massa e a aceleração que ele adquire.</p>
+        </section>
+        <section class="law-statement" aria-label="Enunciado da segunda lei">
+            <p>A força resultante é igual ao produto da massa pela aceleração do corpo.</p>
+            <div class="formula-stack">
+                <span class="formula">ΣF = m · a</span>
+                <span class="formula-secondary">a = ΣF / m</span>
+            </div>
+        </section>
+        <section class="experiment-section" aria-labelledby="video-title">
+            <div class="experiment-heading">
+                <p class="eyebrow">Demonstração prática</p>
+                <h2 id="video-title">Vídeo da experiência</h2>
+            </div>
+            <div class="video-placeholder">
+                <span class="video-play" aria-hidden="true"></span>
+                <p>Espaço reservado para o vídeo da segunda lei</p>
+            </div>
+        </section>
+        <section class="simulation-section" data-simulation="force" aria-labelledby="simulation-title">
+            <div class="simulation-heading">
+                <p class="eyebrow">Simulação interativa</p>
+                <h2 id="simulation-title">Força, massa e aceleração</h2>
+                <p>Ajuste os valores e veja como a aceleração responde.</p>
+            </div>
+            <div class="simulation-layout">
+                <div class="simulation-scene">
+                    <div class="scene-readout">
+                        <div>
+                            <span class="readout-label">Aceleração</span>
+                            <output class="readout-value" data-output="acceleration" aria-live="polite">5,0 m/s²</output>
+                        </div>
+                        <span class="scene-tag" data-output="equation">10 N ÷ 2 kg</span>
+                    </div>
+                    <div class="sim-track" data-role="track" aria-label="Pista para o carrinho">
+                        <div class="sim-object cart-object" data-role="object" aria-hidden="true">m</div>
+                    </div>
+                    <p class="scene-message" data-output="message" aria-live="polite">Aceleração calculada pela relação a = F / m.</p>
+                </div>
+                <div class="simulation-controls">
+                    <div class="range-control">
+                        <div class="range-heading">
+                            <label for="force-value">Força aplicada</label>
+                            <output data-value="force" for="force-value">10 N</output>
+                        </div>
+                        <input id="force-value" type="range" min="2" max="20" step="2" value="10" data-control="force">
+                    </div>
+                    <div class="range-control">
+                        <div class="range-heading">
+                            <label for="mass-value">Massa do carrinho</label>
+                            <output data-value="mass" for="mass-value">2 kg</output>
+                        </div>
+                        <input id="mass-value" type="range" min="1" max="10" step="1" value="2" data-control="mass">
+                    </div>
+                    <div class="simulation-buttons">
+                        <button type="button" data-action="apply">Aplicar força</button>
+                        <button type="button" class="button-secondary" data-action="reset">Reiniciar</button>
+                    </div>
+                    <p class="control-hint">Com a mesma força, aumentar a massa reduz a aceleração.</p>
+                </div>
+            </div>
+        </section>
+        <section class="law-details">
+            <div>
+                <h2>O que isso significa?</h2>
+                <p>Para uma mesma massa, uma força resultante maior produz maior aceleração. Para uma mesma força, um corpo de maior massa tende a apresentar menor aceleração. No Sistema Internacional, força é medida em newtons (N).</p>
+            </div>
+            <div>
+                <h2>Um exemplo cotidiano</h2>
+                <p>É mais fácil acelerar um carrinho de compras vazio do que um cheio. Com a mesma força aplicada, o carrinho de menor massa ganha velocidade mais rapidamente.</p>
+            </div>
+        </section>
+        <nav class="law-pagination" aria-label="Navegação entre as leis">
+            <a href="lei1.html">← Lei da inércia</a>
+            <a href="lei3.html">Próxima lei: ação e reação →</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>Leis de Newton <span>·</span> Um estudo sobre movimento e forças</p>
+            <a href="#">Voltar ao topo ↑</a>
+        </div>
+    </footer>
+    <script src="simulations.js" defer></script>
+</body>
+</html>

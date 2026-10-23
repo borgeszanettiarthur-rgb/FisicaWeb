@@ -1,0 +1,889 @@
+:root {
+    color-scheme: light;
+    --ink: #172b2b;
+    --muted: #596866;
+    --paper: #f4f3ed;
+    --surface: #fffefa;
+    --line: #d8ded6;
+    --green: #245b4d;
+    --green-dark: #173e36;
+    --copper: #b85d3c;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-width: 320px;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Segoe UI", sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+}
+
+.container,
+.header-inner,
+.footer-inner {
+    width: min(100% - 48px, 1040px);
+    margin: 0 auto;
+}
+
+.site-header {
+    position: sticky;
+    z-index: 5;
+    top: 0;
+    background: var(--green-dark);
+    color: var(--surface);
+}
+
+.header-inner {
+    display: flex;
+    min-height: 76px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.logo {
+    flex-shrink: 0;
+    color: var(--surface);
+    font-family: Georgia, serif;
+    font-size: 21px;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.logo span {
+    color: #c3d4c7;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 6px;
+    list-style: none;
+}
+
+nav a {
+    display: block;
+    padding: 9px 12px;
+    border-radius: 3px;
+    color: #e0e9e1;
+    font-size: 14px;
+    text-decoration: none;
+    transition: background-color 160ms ease, color 160ms ease;
+}
+
+nav a:hover,
+nav a:focus-visible,
+nav a[aria-current="page"] {
+    background: #315d50;
+    color: #fffefa;
+}
+
+.home-main,
+.law-main {
+    padding-top: 76px;
+    padding-bottom: 88px;
+}
+
+.introduction {
+    max-width: 760px;
+    padding-bottom: 66px;
+}
+
+.eyebrow {
+    margin-bottom: 12px;
+    color: var(--copper);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
+h1,
+h2,
+h3 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-weight: 500;
+    line-height: 1.15;
+}
+
+.introduction h1 {
+    max-width: 700px;
+    margin-bottom: 22px;
+    font-size: clamp(42px, 7vw, 68px);
+}
+
+.introduction h1 span {
+    color: var(--green);
+    font-style: italic;
+}
+
+.introduction p:not(.eyebrow) {
+    max-width: 690px;
+    color: var(--muted);
+}
+
+.introduction .lead {
+    margin-bottom: 14px;
+    color: var(--ink);
+    font-size: 19px;
+    line-height: 1.6;
+}
+
+.laws-section {
+    padding: 34px 0 48px;
+    border-top: 1px solid var(--line);
+}
+
+.section-heading {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 22px;
+}
+
+.section-heading .eyebrow {
+    margin: 0;
+}
+
+.section-heading h2,
+.newton-section h2 {
+    font-size: 32px;
+}
+
+.law-list {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+}
+
+.law-preview {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    gap: 12px;
+    padding: 23px 20px 24px 0;
+}
+
+.law-preview + .law-preview {
+    padding-left: 20px;
+    border-left: 1px solid var(--line);
+}
+
+.law-number {
+    color: var(--copper);
+    font-family: Georgia, serif;
+    font-size: 18px;
+}
+
+.law-preview h3 {
+    margin-bottom: 9px;
+    font-size: 22px;
+}
+
+.law-preview p {
+    min-height: 108px;
+    margin-bottom: 16px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.text-link {
+    color: var(--green);
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+.text-link span {
+    display: inline-block;
+    margin-left: 4px;
+    transition: transform 160ms ease;
+}
+
+.text-link:hover span {
+    transform: translateX(3px);
+}
+
+.newton-section {
+    display: grid;
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 34px;
+    align-items: start;
+    padding: 36px 0 0;
+}
+
+.newton-portrait {
+    width: 150px;
+    margin: 0;
+}
+
+.newton-portrait img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    object-fit: cover;
+    object-position: center top;
+}
+
+.newton-portrait figcaption {
+    margin-top: 7px;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.4;
+}
+
+.newton-portrait figcaption a {
+    color: var(--green);
+    text-underline-offset: 2px;
+}
+
+.newton-section h2 {
+    margin-bottom: 16px;
+}
+
+.newton-section p:not(.eyebrow) {
+    max-width: 720px;
+    margin-top: 10px;
+    color: var(--muted);
+}
+
+.site-footer {
+    background: var(--green-dark);
+    color: #dce5dd;
+}
+
+.footer-inner {
+    display: flex;
+    min-height: 72px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    font-size: 13px;
+}
+
+.footer-inner span {
+    padding: 0 5px;
+    color: #d69072;
+}
+
+.footer-inner a {
+    color: #fffefa;
+    text-decoration-color: #8aa79a;
+    text-underline-offset: 4px;
+}
+
+.breadcrumb {
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.breadcrumb a {
+    color: var(--green);
+    text-underline-offset: 3px;
+}
+
+.law-heading {
+    max-width: 760px;
+    padding-bottom: 38px;
+}
+
+.law-heading h1 {
+    margin-bottom: 16px;
+    font-size: clamp(40px, 7vw, 62px);
+}
+
+.law-heading > p:last-child {
+    max-width: 700px;
+    color: var(--muted);
+    font-size: 18px;
+}
+
+.law-statement {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+    margin-bottom: 38px;
+    padding: 26px 30px;
+    border-left: 4px solid var(--copper);
+    background: #e8ece5;
+}
+
+.law-statement p {
+    max-width: 680px;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    line-height: 1.45;
+}
+
+.formula {
+    color: var(--green);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 24px;
+    font-style: italic;
+    white-space: nowrap;
+}
+
+.formula-stack {
+    display: grid;
+    justify-items: end;
+    gap: 4px;
+}
+
+.formula-secondary {
+    color: var(--muted);
+    font-size: 12px;
+    text-align: right;
+}
+
+.formula sub {
+    font-size: 60%;
+}
+
+.experiment-section {
+    padding: 0 0 38px;
+}
+
+.experiment-heading {
+    margin-bottom: 16px;
+}
+
+.experiment-heading .eyebrow {
+    margin-bottom: 6px;
+}
+
+.experiment-heading h2 {
+    font-size: 28px;
+}
+
+.video-placeholder {
+    display: grid;
+    min-height: 220px;
+    aspect-ratio: 16 / 9;
+    align-content: center;
+    justify-items: center;
+    gap: 12px;
+    padding: 24px;
+    border: 1px solid #315d50;
+    border-radius: 3px;
+    background: var(--green-dark);
+    color: #e0e9e1;
+    text-align: center;
+}
+
+.video-placeholder p {
+    font-size: 14px;
+}
+
+.experiment-video {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 1px solid #315d50;
+    border-radius: 3px;
+    background: var(--green-dark);
+}
+
+.video-hint {
+    margin-top: 10px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.video-play {
+    display: grid;
+    width: 48px;
+    aspect-ratio: 1;
+    place-items: center;
+    border: 1px solid #9ab2a3;
+    border-radius: 50%;
+}
+
+.video-play::after {
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
+    border-left: 10px solid #e0e9e1;
+    content: "";
+}
+
+.simulation-section {
+    padding: 0 0 44px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 34px;
+}
+
+.simulation-heading {
+    margin-bottom: 20px;
+}
+
+.simulation-heading .eyebrow {
+    margin-bottom: 6px;
+}
+
+.simulation-heading h2 {
+    margin-bottom: 8px;
+    font-size: 28px;
+}
+
+.simulation-heading > p:last-child {
+    color: var(--muted);
+}
+
+.simulation-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(230px, 0.8fr);
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+}
+
+.simulation-scene,
+.simulation-controls {
+    min-width: 0;
+    padding: 22px;
+}
+
+.simulation-scene {
+    border-right: 1px solid var(--line);
+}
+
+.scene-readout {
+    display: flex;
+    min-height: 47px;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.scene-readout > div {
+    display: grid;
+    gap: 2px;
+}
+
+.readout-label {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.readout-value {
+    color: var(--green-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.scene-tag {
+    padding: 4px 8px;
+    border-radius: 2px;
+    background: #e8ece5;
+    color: var(--green-dark);
+    font-size: 12px;
+}
+
+.sim-track {
+    position: relative;
+    height: 88px;
+    overflow: hidden;
+    border-bottom: 2px solid #8b9a8e;
+    background: repeating-linear-gradient(90deg, transparent 0 39px, #e7ebe4 39px 40px);
+}
+
+.sim-object {
+    display: grid;
+    width: 44px;
+    height: 38px;
+    place-items: center;
+    border: 1px solid #173e36;
+    border-radius: 3px 3px 1px 1px;
+    background: #b85d3c;
+    color: #fffefa;
+    font-family: Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.inertia-object,
+.cart-object {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.cart-object {
+    border-radius: 4px 4px 2px 2px;
+    background: var(--green);
+}
+
+.scene-message {
+    min-height: 44px;
+    padding-top: 12px;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.simulation-controls {
+    display: grid;
+    align-content: start;
+    gap: 18px;
+}
+
+.range-control {
+    display: grid;
+    gap: 8px;
+}
+
+.range-heading {
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 13px;
+}
+
+.range-heading label {
+    font-weight: 600;
+}
+
+.range-heading output {
+    color: var(--green);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.range-control input[type="range"] {
+    width: 100%;
+    accent-color: var(--green);
+}
+
+.check-control {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: var(--ink);
+    font-size: 13px;
+}
+
+.check-control input {
+    width: 17px;
+    height: 17px;
+    accent-color: var(--green);
+}
+
+.simulation-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.simulation-buttons button {
+    min-height: 40px;
+    padding: 8px 12px;
+    border: 1px solid var(--green-dark);
+    border-radius: 3px;
+    background: var(--green-dark);
+    color: #fffefa;
+    cursor: pointer;
+    font: inherit;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.simulation-buttons button:hover {
+    background: var(--green);
+}
+
+.simulation-buttons .button-secondary {
+    background: transparent;
+    color: var(--green-dark);
+}
+
+.simulation-buttons .button-secondary:hover {
+    background: #e8ece5;
+}
+
+.control-hint {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.pair-track {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 88px;
+}
+
+.pair-half {
+    position: relative;
+    min-width: 0;
+    border-bottom: 2px solid #8b9a8e;
+    background: repeating-linear-gradient(90deg, transparent 0 39px, #e7ebe4 39px 40px);
+}
+
+.pair-half + .pair-half {
+    border-left: 1px dashed var(--line);
+}
+
+.pair-object {
+    position: absolute;
+    bottom: 0;
+}
+
+.pair-object-a {
+    right: 8px;
+}
+
+.pair-object-b {
+    left: 8px;
+    background: var(--green);
+}
+
+.force-direction {
+    position: absolute;
+    top: 7px;
+    color: var(--copper);
+    font-size: 15px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.pair-left .force-direction {
+    right: 9px;
+}
+
+.pair-right .force-direction {
+    left: 9px;
+}
+
+.pair-readouts {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 18px;
+    padding-top: 10px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.pair-readouts output {
+    color: var(--green-dark);
+    font-weight: 700;
+}
+
+.law-details {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 42px;
+    padding: 8px 0 40px;
+}
+
+.law-details h2 {
+    margin-bottom: 12px;
+    font-size: 25px;
+}
+
+.law-details p,
+.law-details li {
+    color: var(--muted);
+}
+
+.law-details ul {
+    padding-left: 20px;
+}
+
+.law-details li + li {
+    margin-top: 8px;
+}
+
+.law-pagination {
+    display: flex;
+    justify-content: space-between;
+    gap: 18px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+}
+
+.law-pagination a {
+    color: var(--green);
+    font-weight: 700;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+
+a:focus-visible {
+    outline: 3px solid #d69072;
+    outline-offset: 3px;
+}
+
+@media (max-width: 720px) {
+    .container,
+    .header-inner,
+    .footer-inner {
+        width: min(100% - 36px, 560px);
+    }
+
+    .header-inner {
+        min-height: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 14px 0 10px;
+    }
+
+    nav ul {
+        justify-content: flex-start;
+        gap: 2px;
+    }
+
+    nav a {
+        padding: 7px 9px;
+        font-size: 13px;
+    }
+
+    .home-main,
+    .law-main {
+        padding-top: 48px;
+        padding-bottom: 58px;
+    }
+
+    .introduction {
+        padding-bottom: 46px;
+    }
+
+    .law-list {
+        grid-template-columns: 1fr;
+    }
+
+    .law-preview,
+    .law-preview + .law-preview {
+        padding: 20px 0;
+        border-left: 0;
+    }
+
+    .law-preview + .law-preview {
+        border-top: 1px solid var(--line);
+    }
+
+    .law-preview p {
+        min-height: 0;
+    }
+
+    .newton-section {
+        grid-template-columns: 110px minmax(0, 1fr);
+        gap: 20px;
+    }
+
+    .newton-portrait {
+        width: 100px;
+    }
+
+    .section-heading {
+        display: block;
+    }
+
+    .section-heading .eyebrow {
+        margin-bottom: 8px;
+    }
+
+    .law-statement {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding: 21px;
+    }
+
+    .formula-stack {
+        justify-items: start;
+    }
+
+    .formula-secondary {
+        text-align: left;
+    }
+
+    .law-statement p {
+        font-size: 19px;
+    }
+
+    .video-placeholder {
+        min-height: 180px;
+    }
+
+    .law-details {
+        grid-template-columns: 1fr;
+        gap: 26px;
+    }
+
+    .simulation-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .simulation-scene {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+    }
+
+    .simulation-scene,
+    .simulation-controls {
+        padding: 18px;
+    }
+
+    .footer-inner {
+        min-height: 78px;
+    }
+}
+
+@media (max-width: 430px) {
+    .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 4px;
+        padding: 14px 0;
+    }
+
+    .newton-section {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .law-pagination {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms !important;
+    }
+}

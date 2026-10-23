@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça a primeira lei de Newton, o princípio da inércia.">
+    <title>Primeira Lei: Inércia | Física em movimento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Física <span>em movimento</span></a>
+            <nav aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="lei1.html" aria-current="page">1ª Lei</a></li>
+                    <li><a href="lei2.html">2ª Lei</a></li>
+                    <li><a href="lei3.html">3ª Lei</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container law-main">
+        <p class="breadcrumb"><a href="index.html">Início</a> / Primeira lei</p>
+        <section class="law-heading">
+            <p class="eyebrow">Lei do movimento · 01</p>
+            <h1>Lei da inércia</h1>
+            <p>A primeira lei descreve a tendência dos corpos de preservar seu estado de movimento. Essa propriedade é chamada de inércia.</p>
+        </section>
+        <section class="law-statement" aria-label="Enunciado da primeira lei">
+            <p>Se a força resultante sobre um corpo for nula, ele permanece em repouso ou em movimento retilíneo uniforme.</p>
+            <div class="formula-stack">
+                <span class="formula">ΣF = 0</span>
+                <span class="formula-secondary">a = 0 · v = constante</span>
+            </div>
+        </section>
+        <section class="experiment-section" aria-labelledby="video-title">
+            <div class="experiment-heading">
+                <p class="eyebrow">Demonstração prática</p>
+                <h2 id="video-title">Vídeo da experiência</h2>
+            </div>
+            <video class="experiment-video" controls preload="metadata" playsinline>
+                <source src="videos/primeira-lei.mp4" type="video/mp4">
+                Seu navegador não consegue reproduzir este vídeo.
+            </video>
+            <p class="video-hint">Coloque seu vídeo na pasta <strong>videos</strong> com o nome <strong>primeira-lei.mp4</strong>.</p>
+        </section>
+        <section class="simulation-section" data-simulation="inertia" aria-labelledby="simulation-title">
+            <div class="simulation-heading">
+                <p class="eyebrow">Simulação interativa</p>
+                <h2 id="simulation-title">O movimento continua?</h2>
+                <p>Dê um empurrão e compare o movimento com e sem atrito.</p>
+            </div>
+            <div class="simulation-layout">
+                <div class="simulation-scene">
+                    <div class="scene-readout">
+                        <div>
+                            <span class="readout-label">Velocidade</span>
+                            <output class="readout-value" data-output="speed">0,0 m/s</output>
+                        </div>
+                        <span class="scene-tag">Objeto de 2 kg</span>
+                    </div>
+                    <div class="sim-track" data-role="track" aria-label="Pista de movimento">
+                        <div class="sim-object inertia-object" data-role="object" aria-hidden="true">m</div>
+                    </div>
+                    <p class="scene-message" data-output="message" aria-live="polite">Objeto em repouso. Escolha o atrito e empurre.</p>
+                </div>
+                <div class="simulation-controls">
+                    <div class="range-control">
+                        <div class="range-heading">
+                            <label for="inertia-force">Força do empurrão</label>
+                            <output data-value="force" for="inertia-force">4 N</output>
+                        </div>
+                        <input id="inertia-force" type="range" min="2" max="10" step="2" value="4" data-control="force">
+                    </div>
+                    <label class="check-control">
+                        <input type="checkbox" data-control="friction" checked>
+                        <span>Superfície com atrito</span>
+                    </label>
+                    <div class="simulation-buttons">
+                        <button type="button" data-action="push">Empurrar</button>
+                        <button type="button" class="button-secondary" data-action="reset">Reiniciar</button>
+                    </div>
+                    <p class="control-hint">O empurrão dura 0,5 s. Com atrito desligado, o objeto mantém a velocidade.</p>
+                </div>
+            </div>
+        </section>
+        <section class="law-details">
+            <div>
+                <h2>O que isso significa?</h2>
+                <p>Não é necessária uma força resultante para manter um objeto em movimento constante. Uma força resultante é necessária para mudar sua velocidade, seja em módulo, direção ou sentido. No cotidiano, o atrito costuma esconder esse efeito ao desacelerar os objetos.</p>
+            </div>
+            <div>
+                <h2>Um exemplo cotidiano</h2>
+                <p>Quando um ônibus freia, os passageiros tendem a continuar em movimento para a frente. O cinto de segurança exerce a força que ajuda a alterar esse movimento junto com o veículo.</p>
+            </div>
+        </section>
+        <nav class="law-pagination" aria-label="Navegação entre as leis">
+            <a href="index.html">← Início</a>
+            <a href="lei2.html">Próxima lei: princípio fundamental →</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>Leis de Newton <span>·</span> Um estudo sobre movimento e forças</p>
+            <a href="#">Voltar ao topo ↑</a>
+        </div>
+    </footer>
+    <script src="simulations.js" defer></script>
+</body>
+</html>

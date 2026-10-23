@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conheça a terceira lei de Newton, o princípio da ação e reação.">
+    <title>Terceira Lei: Ação e Reação | Física em movimento</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="logo">Física <span>em movimento</span></a>
+            <nav aria-label="Navegação principal">
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="lei1.html">1ª Lei</a></li>
+                    <li><a href="lei2.html">2ª Lei</a></li>
+                    <li><a href="lei3.html" aria-current="page">3ª Lei</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main class="container law-main">
+        <p class="breadcrumb"><a href="index.html">Início</a> / Terceira lei</p>
+        <section class="law-heading">
+            <p class="eyebrow">Lei do movimento · 03</p>
+            <h1>Ação e reação</h1>
+            <p>A terceira lei mostra que as forças surgem nas interações: elas aparecem em pares e atuam em corpos diferentes.</p>
+        </section>
+        <section class="law-statement" aria-label="Enunciado da terceira lei">
+            <p>Se um corpo A exerce uma força sobre um corpo B, B exerce sobre A uma força de mesma intensidade e direção, mas de sentido oposto.</p>
+            <div class="formula-stack">
+                <span class="formula">F<sub>A→B</sub> = −F<sub>B→A</sub></span>
+                <span class="formula-secondary">mesma intensidade · sentidos opostos</span>
+            </div>
+        </section>
+        <section class="experiment-section" aria-labelledby="video-title">
+            <div class="experiment-heading">
+                <p class="eyebrow">Demonstração prática</p>
+                <h2 id="video-title">Vídeo da experiência</h2>
+            </div>
+            <div class="video-placeholder">
+                <span class="video-play" aria-hidden="true"></span>
+                <p>Espaço reservado para o vídeo da terceira lei</p>
+            </div>
+        </section>
+        <section class="simulation-section" data-simulation="action-reaction" aria-labelledby="simulation-title">
+            <div class="simulation-heading">
+                <p class="eyebrow">Simulação interativa</p>
+                <h2 id="simulation-title">Forças em pares</h2>
+                <p>Altere as massas e observe forças iguais atuando em corpos diferentes.</p>
+            </div>
+            <div class="simulation-layout">
+                <div class="simulation-scene">
+                    <div class="scene-readout">
+                        <div>
+                            <span class="readout-label">Forças da interação</span>
+                            <output class="readout-value" data-output="forces" aria-live="polite">10 N e −10 N</output>
+                        </div>
+                        <span class="scene-tag">mesma intensidade</span>
+                    </div>
+                    <div class="pair-track" data-role="track" aria-label="Dois corpos interagindo">
+                        <div class="pair-half pair-left">
+                            <span class="force-direction" aria-hidden="true">← F</span>
+                            <div class="sim-object pair-object pair-object-a" data-role="body-a" aria-hidden="true">A</div>
+                        </div>
+                        <div class="pair-half pair-right">
+                            <span class="force-direction" aria-hidden="true">F →</span>
+                            <div class="sim-object pair-object pair-object-b" data-role="body-b" aria-hidden="true">B</div>
+                        </div>
+                    </div>
+                    <div class="pair-readouts">
+                        <p>Corpo A: <output data-output="acceleration-a">10,0 m/s²</output></p>
+                        <p>Corpo B: <output data-output="acceleration-b">10,0 m/s²</output></p>
+                    </div>
+                    <p class="scene-message" data-output="message" aria-live="polite">As forças têm sentidos opostos e atuam em corpos diferentes.</p>
+                </div>
+                <div class="simulation-controls">
+                    <div class="range-control">
+                        <div class="range-heading">
+                            <label for="interaction-force">Força da interação</label>
+                            <output data-value="force" for="interaction-force">10 N</output>
+                        </div>
+                        <input id="interaction-force" type="range" min="2" max="10" step="2" value="10" data-control="force">
+                    </div>
+                    <div class="range-control">
+                        <div class="range-heading">
+                            <label for="mass-a">Massa do corpo A</label>
+                            <output data-value="mass-a" for="mass-a">1 kg</output>
+                        </div>
+                        <input id="mass-a" type="range" min="1" max="8" step="1" value="1" data-control="mass-a">
+                    </div>
+                    <div class="range-control">
+                        <div class="range-heading">
+                            <label for="mass-b">Massa do corpo B</label>
+                            <output data-value="mass-b" for="mass-b">1 kg</output>
+                        </div>
+                        <input id="mass-b" type="range" min="1" max="8" step="1" value="1" data-control="mass-b">
+                    </div>
+                    <div class="simulation-buttons">
+                        <button type="button" data-action="apply">Aplicar interação</button>
+                        <button type="button" class="button-secondary" data-action="reset">Reiniciar</button>
+                    </div>
+                    <p class="control-hint">As acelerações podem ser diferentes porque as massas são diferentes.</p>
+                </div>
+            </div>
+        </section>
+        <section class="law-details">
+            <div>
+                <h2>O que isso significa?</h2>
+                <p>As forças de ação e reação têm a mesma intensidade, mas não se anulam, pois cada uma atua em um corpo diferente. Elas acontecem simultaneamente durante a interação.</p>
+            </div>
+            <div>
+                <h2>Um exemplo cotidiano</h2>
+                <p>Ao caminhar, o pé empurra o chão para trás. O chão exerce uma força para a frente sobre o pé, ajudando a impulsionar o corpo.</p>
+            </div>
+        </section>
+        <nav class="law-pagination" aria-label="Navegação entre as leis">
+            <a href="lei2.html">← Princípio fundamental</a>
+            <a href="index.html">Voltar ao início →</a>
+        </nav>
+    </main>
+    <footer class="site-footer">
+        <div class="footer-inner">
+            <p>Leis de Newton <span>·</span> Um estudo sobre movimento e forças</p>
+            <a href="#">Voltar ao topo ↑</a>
+        </div>
+    </footer>
+    <script src="simulations.js" defer></script>
+</body>
+</html>
