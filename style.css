@@ -542,6 +542,61 @@ h3 {
     background: var(--green);
 }
 
+/* --- Simulação da 1ª lei: duas pistas paralelas --- */
+
+.lane-stack {
+    display: grid;
+    gap: 14px;
+}
+
+.lane-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+.lane-label {
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.lane-speed {
+    margin-left: auto;
+    color: var(--green-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.lane-force {
+    padding: 2px 7px;
+    border: 1px solid #d6a48f;
+    border-radius: 2px;
+    background: #f3e4dc;
+    color: #8f4227;
+    font-size: 11px;
+    white-space: nowrap;
+}
+
+.lane-force-free {
+    border-color: #a8c4b1;
+    background: #e4ede6;
+    color: var(--green);
+}
+
+.lane-force[hidden] {
+    display: none;
+}
+
+.lane-track {
+    height: 68px;
+}
+
+.object-free {
+    background: var(--green);
+}
+
 .scene-message {
     min-height: 44px;
     padding-top: 12px;
@@ -734,6 +789,34 @@ h3 {
     font-weight: 700;
     text-decoration-thickness: 1px;
     text-underline-offset: 4px;
+}
+
+.skip-link {
+    position: absolute;
+    z-index: 10;
+    top: -60px;
+    left: 16px;
+    padding: 10px 16px;
+    border-radius: 0 0 3px 3px;
+    background: var(--copper);
+    color: #fffefa;
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: top 160ms ease;
+}
+
+.skip-link:focus-visible {
+    top: 0;
+    outline: 3px solid #fffefa;
+    outline-offset: -6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .sim-object,
+    .pair-object {
+        transition-duration: 0.01ms !important;
+    }
 }
 
 a:focus-visible {

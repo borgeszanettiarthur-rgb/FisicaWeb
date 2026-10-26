@@ -4,80 +4,129 @@
         maximumFractionDigits: digits
     });
 
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    // Em uma animação, o primeiro quadro precisa receber um delta pequeno e fixo.
+    // performance.now() pode ser maior que o timestamp do requestAnimationFrame e
+    // gerar um delta enorme (ou negativo) no primeiro passo.
+    const firstDelta = 1 / 60;
+
     const initializeInertia = (simulation) => {
-        const track = simulation.querySelector('[data-role="track"]');
-        const object = simulation.querySelector('[data-role="object"]');
-        const forceInput = simulation.querySelector('[data-control="force"]');
-        const frictionInput = simulation.querySelector('[data-control="friction"]');
-        const speedOutput = simulation.querySelector('[data-output="speed"]');
+        const laneFree = {
+            track: simulation.querySelector('[data-role="track-free"]'),
+            object: simulation.querySelector('[data-role="object-free"]'),
+            speed: simulation.querySelector('[data-output="speed-free"]')
+        };
+        const laneFriction = {
+            track: simulation.querySelector('[data-role="track-friction"]'),
+            object: simulation.querySelector('[data-role="object-friction"]'),
+            speed: simulation.querySelector('[data-output="speed-friction"]')
+        };
+        const forceFree = simulation.querySelector('[data-output="force-free"]');
+        const forceFriction = simulation.querySelector('[data-output="force-friction"]');
+        const showForceInput = simulation.querySelector('[data-control="show-force"]');
         const messageOutput = simulation.querySelector('[data-output="message"]');
-        let position = 0;
-        let velocity = 0;
-        let previousTime = 0;
-        let frame = 0;
+
+        const MASS = 2;          // kg
+        const PUSH = 4;          // N
+        const PUSH_TIME = 0.5;   // s
+        const FRICTION_DECEL = 0.9; // m/s²
+        const TRACK_METERS = 5;  // comprimento de pista mostrado na cena
+
+        const state = {
+            freePosition: 0,
+            freeVelocity: 0,
+            frictionPosition: 0,
+            frictionVelocity: 0,
+            previousTime: 0,
+            frame: 0
+        };
+
+        const percent = (position) => Math.min(position / TRACK_METERS, 1);
 
         const render = () => {
-            const travelRange = Math.max(0, track.clientWidth - object.offsetWidth);
-            object.style.transform = `translateX(${Math.min(position / 5, 1) * travelRange}px)`;
-            speedOutput.textContent = `${formatNumber(velocity)} m/s`;
+            const freeRange = Math.max(0, laneFree.track.clientWidth - laneFree.object.offsetWidth);
+            const frictionRange = Math.max(0, laneFriction.track.clientWidth - laneFriction.object.offsetWidth);
+            laneFree.object.style.transform = `translateX(${percent(state.freePosition) * freeRange}px)`;
+            laneFriction.object.style.transform = `translateX(${percent(state.frictionPosition) * frictionRange}px)`;
+            laneFree.speed.textContent = `${formatNumber(state.freeVelocity)} m/s`;
+            laneFriction.speed.textContent = `${formatNumber(state.frictionVelocity)} m/s`;
+        };
+
+        const stop = () => {
+            cancelAnimationFrame(state.frame);
+            state.frame = 0;
+            state.previousTime = 0;
+        };
+
+        const finish = (messages) => {
+            messageOutput.textContent = messages;
+            render();
+            stop();
         };
 
         const animate = (time) => {
-            const elapsed = Math.min((time - previousTime) / 1000, 0.05);
-            previousTime = time;
+            const elapsed = state.previousTime
+                ? Math.min(Math.max((time - state.previousTime) / 1000, 0), 0.05)
+                : firstDelta;
+            state.previousTime = time;
 
-            if (frictionInput.checked) {
-                velocity = Math.max(0, velocity - 0.8 * elapsed);
-            }
+            // Sem atrito: nenhuma força resultante age, então a velocidade não muda.
+            state.freePosition = Math.min(TRACK_METERS, state.freePosition + state.freeVelocity * elapsed);
 
-            position = Math.min(5, position + velocity * elapsed);
+            // Com atrito: a força resultante (atrito) é contrária ao movimento e freia o corpo.
+            state.frictionVelocity = Math.max(0, state.frictionVelocity - FRICTION_DECEL * elapsed);
+            state.frictionPosition = Math.min(TRACK_METERS, state.frictionPosition + state.frictionVelocity * elapsed);
             render();
 
-            if (position >= 5) {
-                velocity = 0;
-                messageOutput.textContent = "O objeto chegou ao fim da pista.";
-                render();
-                frame = 0;
-            } else if (velocity <= 0.01) {
-                velocity = 0;
-                messageOutput.textContent = "O atrito parou o objeto. Sem atrito, ele seguiria em movimento.";
-                render();
-                frame = 0;
+            const freeArrived = state.freePosition >= TRACK_METERS;
+            const frictionStopped = state.frictionVelocity <= 0.01 && state.frictionPosition > 0;
+
+            if (freeArrived && frictionStopped) {
+                finish(`O corpo sem atrito percorreu a pista mantendo ${formatNumber(state.freeVelocity)} m/s, enquanto o outro parou em ${formatNumber(state.frictionPosition)} m.`);
+            } else if (frictionStopped) {
+                finish("O corpo com atrito parou. O outro continua em movimento retilíneo uniforme: ΣF = 0, então v é constante.");
+            } else if (freeArrived) {
+                finish("O corpo sem atrito chegou ao fim da pista sem perder velocidade.");
             } else {
-                frame = requestAnimationFrame(animate);
+                state.frame = requestAnimationFrame(animate);
             }
         };
 
-        simulation.querySelector('[data-action="push"]').addEventListener("click", () => {
-            velocity += (Number(forceInput.value) / 2) * 0.5;
-            messageOutput.textContent = frictionInput.checked
-                ? "O objeto foi empurrado; o atrito reduz sua velocidade."
-                : "O objeto foi empurrado e seguirá sem perder velocidade.";
-            if (!frame) {
-                previousTime = performance.now();
-                frame = requestAnimationFrame(animate);
+        const applyPush = () => {
+            // Impulso: F · Δt = m · Δv  =>  Δv = 4 · 0,5 / 2 = 1,0 m/s (igual para os dois)
+            const deltaV = (PUSH * PUSH_TIME) / MASS;
+            state.freeVelocity += deltaV;
+            state.frictionVelocity += deltaV;
+            messageOutput.textContent = "Mesmo empurrão: os dois saem com 1,0 m/s. Agora observe qual mantém a velocidade.";
+            if (!state.frame) {
+                state.previousTime = 0;
+                state.frame = requestAnimationFrame(animate);
             }
             render();
-        });
+        };
 
-        simulation.querySelector('[data-action="reset"]').addEventListener("click", () => {
-            cancelAnimationFrame(frame);
-            frame = 0;
-            position = 0;
-            velocity = 0;
-            messageOutput.textContent = "Objeto em repouso. Escolha o atrito e empurre.";
+        const reset = () => {
+            stop();
+            state.freePosition = 0;
+            state.freeVelocity = 0;
+            state.frictionPosition = 0;
+            state.frictionVelocity = 0;
+            messageOutput.textContent = "Os dois corpos estão em repouso. Empurre os dois ao mesmo tempo.";
             render();
-        });
+        };
 
-        forceInput.addEventListener("input", () => {
-            simulation.querySelector('[data-value="force"]').textContent = `${forceInput.value} N`;
-        });
-        frictionInput.addEventListener("change", () => {
-            messageOutput.textContent = frictionInput.checked
-                ? "Atrito ligado: o objeto perde velocidade ao se mover."
-                : "Atrito desligado: o objeto mantém a velocidade após o empurrão.";
-        });
+        const syncForce = () => {
+            const visible = showForceInput.checked;
+            forceFree.hidden = !visible;
+            forceFriction.hidden = !visible;
+        };
 
+        simulation.querySelector('[data-action="push"]').addEventListener("click", applyPush);
+        simulation.querySelector('[data-action="reset"]').addEventListener("click", reset);
+        showForceInput.addEventListener("change", syncForce);
+
+        syncForce();
         render();
     };
 
@@ -103,18 +152,21 @@
             cancelAnimationFrame(transitionFrame);
             object.style.transition = "none";
             object.style.transform = "translateX(0px)";
+            // A aceleração máxima possível é 20 N / 1 kg; a escala do deslocamento
+            // precisa usar esse mesmo teto, senão massas diferentes deslocam igual.
         };
 
         simulation.querySelector('[data-action="apply"]').addEventListener("click", () => {
             const acceleration = Number(forceInput.value) / Number(massInput.value);
             const travelRange = Math.max(0, track.clientWidth - object.offsetWidth);
-            const travel = Math.min(0.82, acceleration / 20 * 0.82) * travelRange;
+            // Deslocamento proporcional a "½·a·t²" na escala da cena.
+            const travel = Math.min(1, acceleration / 20) * travelRange * 0.9;
             cancelAnimationFrame(transitionFrame);
             object.style.transition = "none";
             object.style.transform = "translateX(0px)";
             transitionFrame = requestAnimationFrame(() => {
                 void object.offsetWidth;
-                object.style.transition = "transform 1.4s ease-out";
+                object.style.transition = reduceMotion ? "none" : "transform 1.4s ease-out";
                 object.style.transform = `translateX(${travel}px)`;
             });
             messageOutput.textContent = "A mesma força acelera mais o carrinho de menor massa.";
@@ -168,8 +220,11 @@
             const halfWidth = track.clientWidth / 2;
             const rangeA = Math.max(0, halfWidth - bodyA.offsetWidth - 16);
             const rangeB = Math.max(0, halfWidth - bodyB.offsetWidth - 16);
-            const travelA = Math.min(0.75, accelerationA / 10 * 0.75) * rangeA;
-            const travelB = Math.min(0.75, accelerationB / 10 * 0.75) * rangeB;
+            // Mesma escala para os dois corpos: só assim o recuo maior aparece
+            // no corpo de menor massa (a = F/m).
+            const scale = 10;
+            const travelA = Math.min(1, accelerationA / scale) * rangeA * 0.85;
+            const travelB = Math.min(1, accelerationB / scale) * rangeB * 0.85;
             cancelAnimationFrame(transitionFrame);
             bodyA.style.transition = "none";
             bodyB.style.transition = "none";
@@ -178,8 +233,8 @@
             transitionFrame = requestAnimationFrame(() => {
                 void bodyA.offsetWidth;
                 void bodyB.offsetWidth;
-                bodyA.style.transition = "transform 1.2s ease-out";
-                bodyB.style.transition = "transform 1.2s ease-out";
+                bodyA.style.transition = reduceMotion ? "none" : "transform 1.2s ease-out";
+                bodyB.style.transition = reduceMotion ? "none" : "transform 1.2s ease-out";
                 bodyA.style.transform = `translateX(${-travelA}px)`;
                 bodyB.style.transform = `translateX(${travelB}px)`;
             });
