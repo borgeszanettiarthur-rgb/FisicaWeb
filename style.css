@@ -542,61 +542,6 @@ h3 {
     background: var(--green);
 }
 
-/* --- Simulação da 1ª lei: duas pistas paralelas --- */
-
-.lane-stack {
-    display: grid;
-    gap: 14px;
-}
-
-.lane-head {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 6px;
-}
-
-.lane-label {
-    font-size: 13px;
-    font-weight: 700;
-}
-
-.lane-speed {
-    margin-left: auto;
-    color: var(--green-dark);
-    font-family: Georgia, "Times New Roman", serif;
-    font-size: 15px;
-    font-weight: 700;
-}
-
-.lane-force {
-    padding: 2px 7px;
-    border: 1px solid #d6a48f;
-    border-radius: 2px;
-    background: #f3e4dc;
-    color: #8f4227;
-    font-size: 11px;
-    white-space: nowrap;
-}
-
-.lane-force-free {
-    border-color: #a8c4b1;
-    background: #e4ede6;
-    color: var(--green);
-}
-
-.lane-force[hidden] {
-    display: none;
-}
-
-.lane-track {
-    height: 68px;
-}
-
-.object-free {
-    background: var(--green);
-}
-
 .scene-message {
     min-height: 44px;
     padding-top: 12px;
@@ -791,34 +736,6 @@ h3 {
     text-underline-offset: 4px;
 }
 
-.skip-link {
-    position: absolute;
-    z-index: 10;
-    top: -60px;
-    left: 16px;
-    padding: 10px 16px;
-    border-radius: 0 0 3px 3px;
-    background: var(--copper);
-    color: #fffefa;
-    font-size: 14px;
-    font-weight: 700;
-    text-decoration: none;
-    transition: top 160ms ease;
-}
-
-.skip-link:focus-visible {
-    top: 0;
-    outline: 3px solid #fffefa;
-    outline-offset: -6px;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .sim-object,
-    .pair-object {
-        transition-duration: 0.01ms !important;
-    }
-}
-
 a:focus-visible {
     outline: 3px solid #d69072;
     outline-offset: 3px;
@@ -970,3 +887,69 @@ a:focus-visible {
         transition-duration: 0.01ms !important;
     }
 }
+
+/* Atualização das simulações: física e vetores, sem alterar o restante do site. */
+/* Movimento contínuo, campos numéricos e colisão. Estilos restritos às simulações. */
+.physics-ready .scene-readout { flex-wrap: wrap; margin-bottom: 18px; }
+.physics-ready .readout-value { font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.physics-status-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 14px; }
+.physics-status { padding: 4px 8px; background: #edf3eb; border: 1px solid #c8d8ca; border-radius: 3px; color: var(--green-dark); font-size: 11px; font-weight: 700; }
+.physics-status[data-phase="pushing"], .physics-status[data-phase="contact"] { color: #fffefa; background: var(--green); border-color: var(--green); }
+.physics-status[data-phase="paused"] { color: #77412b; background: #f6ece2; border-color: #ddc5b4; }
+.physics-playback, .physics-camera { color: var(--muted); font-size: 11px; line-height: 1.5; }
+.physics-stage { margin: 0; min-width: 0; }
+.physics-world { display: block; width: 100%; height: 222px; overflow: hidden; }
+.physics-camera { margin-top: 5px; }
+.physics-grid line { stroke: #e3e9df; stroke-width: 1; }
+.physics-grid text { fill: #596866; font-family: "Segoe UI", sans-serif; font-size: 10px; }
+.physics-ground { stroke: #8b9a8e; stroke-width: 2; }
+.physics-body-label { font: bold 15px Georgia, serif; }
+.physics-vector-label { font: 700 11px "Segoe UI", sans-serif; }
+.physics-vector-guide { stroke: #b7c4b8; stroke-width: 1; stroke-dasharray: 3 4; }
+.physics-legend { display: flex; flex-wrap: wrap; gap: 5px 16px; margin-top: 13px; font-size: 12px; font-weight: 600; }
+.physics-key-green { color: var(--green); }
+.physics-key-copper { color: #a54b2f; }
+.physics-metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px 10px; border-top: 1px solid var(--line); margin: 18px 0 0; padding-top: 16px; }
+.physics-metric { min-width: 0; }
+.physics-metric dt { color: var(--muted); font-size: 11px; line-height: 1.4; }
+.physics-metric dd { color: var(--green-dark); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; margin: 5px 0 0; line-height: 1.5; overflow-wrap: anywhere; }
+.physics-summary { border-left: 2px solid #b85d3c; background: #f4f3ed; margin-top: 14px; padding: 12px 14px; font-size: 12px; line-height: 1.65; color: var(--ink); }
+.physics-fields { display: grid; gap: 20px; min-width: 0; }
+.physics-number-control { gap: 4px; min-width: 0; }
+.physics-number-control .range-heading { align-items: center; }
+.physics-number-control .range-heading label { min-width: 0; font-size: 12px; line-height: 1.5; }
+.physics-number-wrap { display: flex; align-items: center; gap: 6px; flex: 0 0 118px; min-width: 0; }
+.physics-number-wrap input[type="number"] { width: 86px; min-width: 0; min-height: 42px; padding: 8px 6px; border: 1px solid #aabdae; border-radius: 3px; background: #fffefa; color: var(--green-dark); font: 700 14px "Segoe UI", sans-serif; }
+.physics-number-wrap > span { color: var(--muted); font-size: 11px; white-space: nowrap; }
+.physics-ready input[aria-invalid="true"] { border-color: #a54128; background: #fff6ed; }
+.physics-ready .range-control input[type="range"] { min-height: 28px; }
+.physics-limit { margin: 0; color: var(--muted); font-size: 10px; line-height: 1.4; }
+.physics-error { color: #943e26; margin: 4px 0 0; font-size: 12px; line-height: 1.5; }
+.physics-extra:empty { display: none; }
+.physics-view-controls { display: grid; gap: 13px; padding-top: 14px; border-top: 1px solid var(--line); }
+.physics-rate-label { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; color: var(--muted); font-size: 12px; }
+.physics-rate-label select { max-width: 100%; min-height: 40px; background: #fffefa; color: var(--green-dark); border: 1px solid #aabdae; border-radius: 3px; padding: 6px 8px; font: inherit; }
+.physics-view-controls .check-control { font-size: 12px; line-height: 1.5; }
+.physics-view-controls input[type="checkbox"] { flex-shrink: 0; }
+.physics-model { border-top: 1px solid var(--line); padding-top: 13px; color: var(--muted); font-size: 12px; line-height: 1.65; }
+.physics-model summary { color: var(--green-dark); font-weight: 700; cursor: pointer; }
+.physics-model p { margin-top: 10px; }
+.physics-ready .simulation-buttons button { min-height: 44px; }
+.physics-ready .simulation-buttons button:disabled { opacity: 0.5; cursor: not-allowed; }
+.physics-ready button:focus-visible, .physics-ready input:focus-visible, .physics-ready select:focus-visible, .physics-ready summary:focus-visible { outline: 3px solid #b85d3c; outline-offset: 3px; }
+.physics-ready [hidden] { display: none !important; }
+@media (max-width: 430px) {
+    .physics-ready .simulation-scene, .physics-ready .simulation-controls { padding: 16px; }
+    .physics-metric dd { font-size: 12px; }
+    .physics-metric dt { font-size: 10px; }
+    .physics-ready .readout-value { font-size: 21px; }
+    .physics-metrics { gap: 14px 8px; }
+}
+
+/* Mantém os espaços de vídeo existentes dentro da largura de telas pequenas. */
+.video-placeholder { width: 100%; min-width: 0; }
+
+/* Duas vistas independentes após a colisão: sem zoom nem mudança de tamanho. */
+.physics-split-divider rect { fill: var(--surface); }
+.physics-view-label { fill: var(--muted); font: 600 11px "Segoe UI", sans-serif; }
+.physics-rate-label select { min-width: 0; }
