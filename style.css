@@ -953,3 +953,38 @@ a:focus-visible {
 .physics-split-divider rect { fill: var(--surface); }
 .physics-view-label { fill: var(--muted); font: 600 11px "Segoe UI", sans-serif; }
 .physics-rate-label select { min-width: 0; }
+
+/* Capa da primeira lei: abre o vídeo somente após o clique. */
+.youtube-cover {
+    position: relative;
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border: 1px solid #315d50;
+    border-radius: 3px;
+    background: var(--green-dark);
+    color: var(--surface);
+    text-decoration: none;
+    cursor: pointer;
+}
+.youtube-cover img { display: block; width: 100%; height: auto; }
+.youtube-cover-play {
+    position: absolute;
+    top: 50%;
+    right: 6%;
+    display: grid;
+    place-items: center;
+    width: clamp(46px, 7vw, 80px);
+    aspect-ratio: 1;
+    transform: translateY(-50%);
+    border: 1px solid rgba(255, 254, 250, 0.8);
+    border-radius: 50%;
+    background: rgba(23, 62, 54, 0.86);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+    transition: background-color 160ms ease;
+}
+.youtube-cover-play svg { width: 46%; height: 46%; }
+.youtube-cover:hover .youtube-cover-play,
+.youtube-cover:focus-visible .youtube-cover-play { background: #b85d3c; }
+.youtube-cover:focus-visible { outline: 3px solid #b85d3c; outline-offset: 4px; }
