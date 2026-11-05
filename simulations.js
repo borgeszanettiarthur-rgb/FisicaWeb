@@ -93,6 +93,7 @@
 
     const numericControl = (parent, prefix, config, changed) => {
         const id = `${prefix}-${config.key}`;
+        const unitSuffix = config.unit ? ` ${config.unit}` : "";
         const root = document.createElement("div");
         root.className = "range-control physics-number-control";
         root.innerHTML = `
@@ -102,13 +103,13 @@
                     <input id="${id}" type="number" inputmode="decimal" step="any"
                         min="${config.min}" max="${config.max}" value="${config.initial}"
                         data-control="${config.key}" aria-describedby="${id}-limit ${id}-error">
-                    <span aria-hidden="true">${config.unit}</span>
+                    ${config.unit ? `<span aria-hidden="true">${config.unit}</span>` : ""}
                 </div>
             </div>
             <input type="range" min="${config.min}" max="${config.max}" step="any"
                 value="${config.initial}" data-slider="${config.key}"
                 aria-label="Ajustar ${config.label.toLowerCase()} pelo controle deslizante">
-            <p class="physics-limit" id="${id}-limit">${fmt(config.min, config.min % 1 ? 1 : 0)} a ${fmt(config.max, 0)} ${config.unit}</p>
+            <p class="physics-limit" id="${id}-limit">${fmt(config.min, config.min % 1 ? 1 : 0)} a ${fmt(config.max, 0)}${unitSuffix}${config.unit ? "" : " · sem unidade"}</p>
             <p class="physics-error" id="${id}-error" role="alert" hidden></p>`;
         parent.append(root);
         const input = $(root, 'input[type="number"]');
@@ -121,7 +122,7 @@
             valid = input.value.trim() !== "" && Number.isFinite(next)
                 && next >= config.min && next <= config.max && !input.validity.badInput;
             input.setAttribute("aria-invalid", String(!valid));
-            const errorText = `Digite um valor de ${fmt(config.min, config.min % 1 ? 1 : 0)} a ${fmt(config.max, 0)} ${config.unit}. O valor inválido não é aplicado.`;
+            const errorText = `Digite um valor de ${fmt(config.min, config.min % 1 ? 1 : 0)} a ${fmt(config.max, 0)}${unitSuffix}. O valor inválido não é aplicado.`;
             input.setCustomValidity(valid ? "" : errorText);
             error.hidden = valid;
             if (!valid) {
@@ -465,43 +466,68 @@
     const massControl = (key = "mass", label = "Massa do objeto", initial = 2) => ({ key, label, unit: "kg", min: 0.1, max: 1000, initial });
 
     const initializeInertia = simulation => {
+        const MASS = 2;
+        const GRAVITY = 9.8;
         const ui = createUI(simulation, {
             eyebrow: "1ª lei", title: "O movimento continua?",
-            description: "Sem atrito, o movimento não termina. Ligue o atrito para ver o objeto desacelerar até parar.",
+            description: "Escolha o coeficiente de atrito μ e compare: depois do empurrão, o corpo mantém a velocidade sem atrito ou desacelera quando há atrito.",
             primaryKey: "speed", primaryLabel: "Velocidade", tag: "Massa: 2 kg",
             legend: '<span class="physics-key-green">→ Empurrão</span><span class="physics-key-copper">← Atrito</span>',
             metrics: [["time", "Tempo físico"], ["position", "Deslocamento"], ["net-force", "Força resultante"]],
-            controls: [{ ...forceControl(4), label: "Força do empurrão" }], action: "Empurrar",
-            hint: "O empurrão dura 0,5 s. Depois, você pode empurrar de novo ou ligar/desligar o atrito, sem reiniciar. O tempo continua mesmo quando o corpo para.",
+            controls: [
+                { ...forceControl(4), label: "Força do empurrão" },
+                { key: "mu", label: "Coeficiente de atrito (μ)", unit: "", min: 0, max: 1, initial: 0.1 }
+            ], action: "Empurrar",
+            hint: "μ = 0 significa sem atrito. Você pode mudar μ durante o movimento, sem reiniciar o relógio. Cada empurrão dura 0,5 s; para sair do repouso, ele precisa superar μ · m · g.",
             summary: "A câmera acompanha o objeto; não há parede nem limite de distância. As setas mostram apenas forças que estão atuando.",
-            model: "Massa constante de 2 kg. Cada empurrão aplica a força escolhida durante 0,5 s. Com atrito ligado, a força de atrito cinético é 1,6 N. Em repouso, o atrito estático equilibra empurrões de até 1,6 N (mesmo limite neste modelo). O atrito nunca faz o corpo inverter o sentido. Peso e normal se equilibram e não aparecem no desenho. Alterar a força vale para o próximo empurrão; ligar ou desligar o atrito tem efeito imediato. A escala fica fixa: a câmera apenas se desloca na horizontal. O objeto nunca muda de tamanho. Para velocidades altas, use a reprodução mais lenta."
+            model: "Corpo de 2 kg sobre uma superfície horizontal, com g = 9,8 m/s². A força normal é m · g = 19,6 N. O coeficiente μ não tem unidade; durante o deslizamento, a intensidade do atrito é μ · m · g. Em repouso, o atrito estático se ajusta ao empurrão até esse limite, em vez de agir sempre com a intensidade máxima. Para simplificar, este modelo usa o mesmo μ para o atrito cinético e para o limite estático. A faixa de 0 a 1 é uma escolha didática; coeficientes reais podem ser maiores que 1. μ = 0 ou a caixa desmarcada eliminam o atrito. Alterar μ ou a caixa tem efeito imediato e não reinicia o movimento. Cada empurrão dura 0,5 s; alterar sua força vale para o próximo empurrão. Peso e normal se equilibram. O atrito não inverte o sentido do movimento. A escala fica fixa e o relógio continua após a parada."
         });
         ui.extra.innerHTML = '<label class="check-control"><input type="checkbox" data-control="friction" checked><span>Superfície com atrito</span></label>';
         const friction = $(ui.extra, "input");
+        ui.summary.innerHTML = '<strong>Atrito atuando agora: <output data-output="friction-force" aria-live="off">0,00 N</output></strong><br><span data-output="friction-details"></span>';
+        const frictionOutput = $(ui.summary, '[data-output="friction-force"]');
+        const frictionDetails = $(ui.summary, '[data-output="friction-details"]');
         ui.apply.dataset.action = "push";
         const world = createWorld(ui);
         let state;
         let clock;
         const forces = () => {
             const applied = state.remaining > EPS ? state.pushForce : 0;
-            const frictionForce = !state.friction ? 0 : state.v > EPS ? 1.6 : Math.min(applied, 1.6);
-            return { applied, friction: frictionForce, net: applied - frictionForce };
+            const limit = state.mu * MASS * GRAVITY;
+            const frictionForce = !state.friction ? 0 : state.v > EPS ? limit : Math.min(applied, limit);
+            return { applied, friction: frictionForce, limit, net: applied - frictionForce };
         };
         const render = () => {
             const f = forces();
-            const acceleration = f.net / 2;
+            const acceleration = f.net / MASS;
             const pushing = state.remaining > EPS;
             value(ui.primary, state.v, "m/s");
             value(ui.metrics.time, state.t, "s");
             value(ui.metrics.position, state.x, "m");
             value(ui.metrics["net-force"], f.net, "N");
+            value(frictionOutput, f.friction, "N");
+            ui.summary.dataset.mu = String(state.mu);
+            ui.summary.dataset.limit = String(f.limit);
+            const muText = state.mu.toLocaleString("pt-BR", {
+                notation: state.mu > 0 && state.mu < 0.0001 ? "scientific" : "standard",
+                maximumSignificantDigits: 6
+            });
+            text(frictionDetails, state.friction
+                ? `μ · m · g ≈ ${muText} × 2 × 9,8 ≈ ${fmt(f.limit)} N. ${state.mu === 0 ? "μ = 0: superfície ideal sem atrito." : "Esse é o atrito ao deslizar e o limite estático deste modelo. Em repouso, o atrito pode ser menor."}`
+                : `Atrito desligado pela caixa. O coeficiente escolhido (${muText}) está guardado; ao ligar, μ · m · g ≈ ${fmt(f.limit)} N.`);
+            const resisting = f.friction > EPS;
             const phase = pushing ? "pushing" : state.v > EPS ? "moving" : "rest";
-            const label = pushing ? "Empurrão em andamento" : state.v > EPS ? (state.friction ? "Desacelerando" : "Velocidade constante") : "Em repouso";
+            const label = pushing ? "Empurrão em andamento" : state.v > EPS ? (resisting ? "Desacelerando" : "Velocidade constante") : "Em repouso";
             const message = pushing
-                ? (f.net > 0 ? "A força resultante acelera o objeto para a direita." : "O atrito estático equilibra esse empurrão: o objeto permanece em repouso.")
+                ? f.applied <= EPS
+                    ? (resisting ? "O empurrão é de 0 N. Só o atrito reduz a velocidade." : "Um empurrão de 0 N não altera o movimento do corpo.")
+                    : f.net > EPS ? "A força resultante acelera o objeto para a direita."
+                    : state.v > EPS
+                        ? (f.net < -EPS ? "O atrito supera o empurrão: o objeto perde velocidade mesmo enquanto a força é aplicada." : "Empurrão e atrito se equilibram: o corpo mantém sua velocidade.")
+                        : "O atrito estático equilibra esse empurrão: ele não é suficiente para tirar o objeto do repouso."
                 : state.v > EPS
-                    ? (state.friction ? "Só o atrito atua na horizontal. A velocidade diminui até chegar a zero." : "Empurrão encerrado e resultante nula: o objeto segue em movimento, sem prazo para parar.")
-                    : clock.started ? "O objeto está parado, mas o relógio continua. Desligar o atrito não o faz sair do repouso; dê um novo empurrão." : "Escolha uma força e empurre. Você pode comparar o mesmo ensaio com e sem atrito.";
+                    ? (resisting ? "Só o atrito atua na horizontal. A velocidade diminui até chegar a zero." : "Empurrão encerrado e resultante nula: o objeto segue em movimento, sem prazo para parar.")
+                    : clock.started ? "O objeto está parado, mas o relógio continua. Reduzir ou desligar o atrito não o faz sair do repouso; dê um novo empurrão." : "Escolha a força e o coeficiente μ, depois empurre. Compare μ = 0 com valores maiores.";
             ui.update(clock, phase, label, message, ui.rate, pushing || clock.paused);
             text(ui.apply, pushing ? "Empurrando…" : "Empurrar");
             if (!ui.motionOff) {
@@ -509,7 +535,7 @@
                 world.body("object", state.x, "m", COPPER);
                 const scale = Math.max(10, f.applied, f.friction);
                 world.vector("applied", state.x, f.applied, scale, `Empurrão: ${fmt(f.applied, 1)} N`, GREEN, 46);
-                world.vector("friction", state.x, -f.friction, scale, `Atrito: ${fmt(f.friction, 1)} N`, COPPER, 98);
+                world.vector("friction", state.x, -f.friction, scale, `Atrito: ${fmt(f.friction)} N`, COPPER, 98);
             }
         };
         const advance = realDt => {
@@ -518,7 +544,7 @@
             // Integra exatamente cada trecho de aceleração constante, inclusive
             // o fim do empurrão e o instante de parada, sem v negativa artificial.
             while (dt > EPS) {
-                const acceleration = forces().net / 2;
+                const acceleration = forces().net / MASS;
                 let step = Math.min(dt, state.remaining > EPS ? state.remaining : Infinity);
                 if (acceleration < 0 && state.v > EPS) step = Math.min(step, state.v / -acceleration);
                 state.x += state.v * step + 0.5 * acceleration * step * step;
@@ -532,7 +558,7 @@
         clock = createClock(advance, render);
         const reset = () => {
             clock.reset();
-            state = { t: 0, x: 0, v: 0, remaining: 0, pushForce: 0, friction: friction.checked };
+            state = { t: 0, x: 0, v: 0, remaining: 0, pushForce: 0, friction: friction.checked, mu: ui.inputs.mu.value };
             render();
         };
         ui.apply.addEventListener("click", () => {
@@ -547,7 +573,15 @@
             state.friction = friction.checked;
             render();
         });
-        ui.onInput = () => render();
+        ui.onInput = (different, key) => {
+            if (different && key === "mu") {
+                // Integra até este instante com o μ anterior antes de aplicar o
+                // novo valor; a posição, a velocidade e o relógio são preservados.
+                clock.flush();
+                state.mu = ui.inputs.mu.value;
+            }
+            render();
+        };
         reset();
         connect(ui, clock, render, reset);
     };
