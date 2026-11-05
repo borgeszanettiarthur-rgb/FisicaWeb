@@ -988,3 +988,84 @@ a:focus-visible {
 .youtube-cover:hover .youtube-cover-play,
 .youtube-cover:focus-visible .youtube-cover-play { background: #b85d3c; }
 .youtube-cover:focus-visible { outline: 3px solid #b85d3c; outline-offset: 4px; }
+
+/* Página inicial: dois exemplos visuais, sem alterar as páginas das leis. */
+.home-examples {
+    padding: 34px 0 48px;
+    border-top: 1px solid var(--line);
+}
+.home-examples .section-heading { margin-bottom: 14px; }
+.home-examples .eyebrow { color: #9f4c30; }
+.home-examples-intro {
+    max-width: 720px;
+    margin-bottom: 26px;
+    color: var(--muted);
+    font-size: 16px;
+}
+.home-examples-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+.home-example {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+}
+.home-example-photo { margin: 0; }
+.home-example-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+.home-example-photo figcaption {
+    padding: 8px 22px 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.5;
+}
+.home-example-photo figcaption a {
+    text-underline-offset: 2px;
+    text-decoration-color: #9cac9f;
+}
+.home-example-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 22px 24px 18px;
+}
+.home-example-content .eyebrow {
+    margin-bottom: 10px;
+    font-size: 11px;
+    letter-spacing: 1.1px;
+}
+.home-example-content h3 {
+    margin-bottom: 14px;
+    font-size: 28px;
+}
+.home-example-description {
+    margin-bottom: 16px;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.7;
+}
+.home-example-content .text-link {
+    display: inline-flex;
+    min-height: 44px;
+    align-items: center;
+    margin-top: auto;
+}
+@media (max-width: 720px) {
+    .home-examples-grid { grid-template-columns: 1fr; }
+    .home-examples-intro { font-size: 15px; }
+    .home-example-content { padding: 20px 20px 16px; }
+    .home-example-photo figcaption { padding-right: 20px; padding-left: 20px; }
+    .home-example-content h3 { min-height: 0; font-size: 26px; }
+}
