@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Uma introdução às três leis de Newton e à vida do cientista que transformou a física.">
     <title>Leis de Newton | Física em movimento</title>
-    <link rel="stylesheet" href="style.css?v=faq-autoria">
+    <link rel="stylesheet" href="style.css?v=tabela-newton">
 </head>
 <body>
     <header class="site-header">
@@ -73,32 +73,69 @@
                 <p class="eyebrow">Um mapa do movimento</p>
                 <h2 id="laws-title">As três leis</h2>
             </div>
-            <div class="law-list">
-                <article class="law-preview">
-                    <span class="law-number">01</span>
-                    <div>
-                        <h3>Inércia</h3>
-                        <p>Um corpo mantém seu estado de repouso ou movimento se nenhuma força resultante atuar sobre ele.</p>
-                        <a href="lei1.html" class="text-link">Explorar a primeira lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </article>
-                <article class="law-preview">
-                    <span class="law-number">02</span>
-                    <div>
-                        <h3>Princípio fundamental</h3>
-                        <p>A força resultante sobre um corpo está relacionada à sua massa e à aceleração produzida.</p>
-                        <a href="lei2.html" class="text-link">Explorar a segunda lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </article>
-                <article class="law-preview">
-                    <span class="law-number">03</span>
-                    <div>
-                        <h3>Ação e reação</h3>
-                        <p>Quando um corpo exerce uma força sobre outro, recebe dele uma força de mesma intensidade e sentido oposto.</p>
-                        <a href="lei3.html" class="text-link">Explorar a terceira lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </article>
+            <p class="laws-table-hint" id="laws-table-hint">Em telas pequenas, deslize a tabela para o lado. Pelo teclado, foque a tabela e use as setas.</p>
+            <div class="laws-table-scroll" role="region" aria-labelledby="laws-table-caption" aria-describedby="laws-table-hint" tabindex="0">
+                <table class="laws-comparison">
+                    <caption id="laws-table-caption">Comparação das três leis de Newton</caption>
+                    <colgroup>
+                        <col class="laws-col-name">
+                        <col class="laws-col-idea">
+                        <col class="laws-col-math">
+                        <col class="laws-col-example">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th scope="col">Lei</th>
+                            <th scope="col">Ideia principal</th>
+                            <th scope="col" class="laws-math-heading">Relação matemática</th>
+                            <th scope="col">Exemplo</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <a class="laws-table-link" href="lei1.html">
+                                    <span class="laws-table-number">1ª lei</span>
+                                    <span class="laws-table-name">Inércia</span>
+                                </a>
+                            </th>
+                            <td>Com força resultante nula, o corpo permanece em repouso ou em movimento retilíneo uniforme.</td>
+                            <td class="laws-math-cell">
+                                <span class="laws-equation" role="math" aria-label="Força resultante igual a zero">ΣF = 0</span>
+                                <span class="laws-equation-detail">a = 0 · v constante</span>
+                            </td>
+                            <td>Um livro sobre a mesa permanece em repouso quando peso e força normal se equilibram.</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="laws-table-link" href="lei2.html">
+                                    <span class="laws-table-number">2ª lei</span>
+                                    <span class="laws-table-name">Princípio fundamental</span>
+                                </a>
+                            </th>
+                            <td>A força resultante produz aceleração. Para uma mesma força resultante, quanto maior a massa, menor a aceleração.</td>
+                            <td class="laws-math-cell">
+                                <span class="laws-equation" role="math" aria-label="Força resultante igual à massa vezes a aceleração">ΣF = m · a</span>
+                            </td>
+                            <td>Uma força resultante de 10 N em um carrinho de 2 kg produz uma aceleração de 5 m/s².</td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <a class="laws-table-link" href="lei3.html">
+                                    <span class="laws-table-number">3ª lei</span>
+                                    <span class="laws-table-name">Ação e reação</span>
+                                </a>
+                            </th>
+                            <td>A interação gera forças simultâneas, de mesma intensidade e sentidos opostos, que atuam em corpos diferentes.</td>
+                            <td class="laws-math-cell">
+                                <span class="laws-equation" role="math" aria-label="Força de A sobre B igual ao oposto da força de B sobre A">F<sub>A→B</sub> = −F<sub>B→A</sub></span>
+                            </td>
+                            <td>Ao caminhar, o pé empurra o chão para trás e o chão exerce uma força para a frente sobre o pé.</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+            <p class="laws-table-note">ΣF é a força resultante. As relações são vetoriais e consideram um referencial inercial; na 2ª lei, a massa é constante. A→B indica a força de A sobre B, e o sinal − representa sentidos opostos.</p>
         </section>
 
         <section class="newton-section" aria-labelledby="newton-title">
@@ -199,5 +236,5 @@
             <a href="#intro-title">Voltar ao início ↑</a>
         </div>
     </footer>
-</body>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a599b1f77fdadaba',t:'MTc5NDUzMDExMw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a599b1f77fdadaba',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
