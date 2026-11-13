@@ -283,6 +283,71 @@
             </div>
         </section>
 
+        <section class="home-quiz" id="teste-seus-conhecimentos" aria-labelledby="quiz-title">
+            <div class="section-heading">
+                <p class="eyebrow">Revisão rápida</p>
+                <h2 id="quiz-title">Teste seus conhecimentos</h2>
+            </div>
+            <p class="home-quiz-intro">Cinco perguntas rápidas sobre as três leis de Newton. Escolha uma alternativa em cada pergunta — o feedback aparece na hora.</p>
+            <div class="home-quiz-shell">
+                <div class="home-quiz-progress" aria-hidden="true">
+                    <span class="home-quiz-progress-label" id="quiz-progress-label">0 de 5 respondidas</span>
+                    <div class="home-quiz-progress-track"><div class="home-quiz-progress-bar" id="quiz-progress-bar"></div></div>
+                </div>
+                <form class="home-quiz-form" id="newton-quiz" novalidate>
+                    <fieldset class="home-quiz-question" data-answer="b">
+                        <legend class="home-quiz-question-title"><span class="home-quiz-number" aria-hidden="true">1</span>Um ônibus freia bruscamente e os passageiros “vão para frente”. Por quê?</legend>
+                        <div class="home-quiz-options">
+                            <label class="home-quiz-option"><input type="radio" name="q1" value="a"><span>A força do freio puxa os passageiros para frente</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q1" value="b"><span>O corpo tende a manter o estado de movimento — é a inércia</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q1" value="c"><span>A gravidade empurra os passageiros na direção do banco da frente</span></label>
+                        </div>
+                        <p class="home-quiz-feedback" hidden>É a inércia: pela 1ª lei, o passageiro tende a manter a velocidade que já tinha. É o ônibus que desacelera por baixo dele.</p>
+                    </fieldset>
+                    <fieldset class="home-quiz-question" data-answer="c">
+                        <legend class="home-quiz-question-title"><span class="home-quiz-number" aria-hidden="true">2</span>A mesma força resultante empurra um carrinho de compras vazio e depois um cheio. O que acontece?</legend>
+                        <div class="home-quiz-options">
+                            <label class="home-quiz-option"><input type="radio" name="q2" value="a"><span>Aceleram igualmente, porque a força resultante é a mesma</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q2" value="b"><span>O carrinho cheio acelera mais rápido, porque é mais pesado</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q2" value="c"><span>O carrinho vazio acelera mais rápido, porque tem menos massa</span></label>
+                        </div>
+                        <p class="home-quiz-feedback" hidden>a = F / m: com a mesma força resultante, menos massa gera mais aceleração. É a 2ª lei em ação.</p>
+                    </fieldset>
+                    <fieldset class="home-quiz-question" data-answer="a">
+                        <legend class="home-quiz-question-title"><span class="home-quiz-number" aria-hidden="true">3</span>Por que as forças de ação e reação não se anulam?</legend>
+                        <div class="home-quiz-options">
+                            <label class="home-quiz-option"><input type="radio" name="q3" value="a"><span>Porque atuam em corpos diferentes</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q3" value="b"><span>Porque a ação é sempre maior que a reação</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q3" value="c"><span>Porque aparecem em instantes diferentes</span></label>
+                        </div>
+                        <p class="home-quiz-feedback" hidden>Pela 3ª lei, o par ação–reação está sempre em corpos diferentes — por isso nunca se somam para anular uma força sobre um único corpo.</p>
+                    </fieldset>
+                    <fieldset class="home-quiz-question" data-answer="c">
+                        <legend class="home-quiz-question-title"><span class="home-quiz-number" aria-hidden="true">4</span>Um livro está parado sobre uma mesa. Sobre as forças que atuam nele:</legend>
+                        <div class="home-quiz-options">
+                            <label class="home-quiz-option"><input type="radio" name="q4" value="a"><span>Não existe nenhuma força, porque ele está parado</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q4" value="b"><span>O peso é maior que a força normal da mesa</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q4" value="c"><span>O peso e a normal se equilibram: a força resultante é nula</span></label>
+                        </div>
+                        <p class="home-quiz-feedback" hidden>Pela 1ª lei, em equilíbrio a velocidade não muda porque a resultante é zero — não porque faltam forças sobre o corpo.</p>
+                    </fieldset>
+                    <fieldset class="home-quiz-question" data-answer="a">
+                        <legend class="home-quiz-question-title"><span class="home-quiz-number" aria-hidden="true">5</span>A Terra atrai uma maçã. O que a maçã faz?</legend>
+                        <div class="home-quiz-options">
+                            <label class="home-quiz-option"><input type="radio" name="q5" value="a"><span>Atrai a Terra com força de mesma intensidade, em sentido oposto</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q5" value="b"><span>Não atrai a Terra — é pequena demais para isso</span></label>
+                            <label class="home-quiz-option"><input type="radio" name="q5" value="c"><span>Atrai a Terra, mas com força bem menor</span></label>
+                        </div>
+                        <p class="home-quiz-feedback" hidden>É a 3ª lei também para a gravidade: o par tem o mesmo módulo. A diferença é que a aceleração da Terra é desprezível, devido à enorme massa dela.</p>
+                    </fieldset>
+                    <div class="home-quiz-result" id="quiz-result" tabindex="-1" hidden>
+                        <p class="home-quiz-result-score"><span id="quiz-score">0</span><small>/5</small></p>
+                        <p class="home-quiz-result-message" id="quiz-message"></p>
+                        <button type="button" class="home-quiz-retake" id="quiz-retake">Refazer o teste</button>
+                    </div>
+                </form>
+            </div>
+        </section>
         <section class="home-project" id="sobre-projeto" aria-labelledby="project-title">
             <div class="section-heading">
                 <p class="eyebrow">Autoria e propósito</p>
@@ -327,245 +392,97 @@
             <a href="#intro-title">Voltar ao início ↑</a>
         </div>
     </footer>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a59efb152a1cf1ed',t:'MTc5NDU4NTUzNg=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a59efb152a1cf1ed',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
-</html>
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Uma introdução às três leis de Newton e à vida do cientista que transformou a física.">
-    <title>Leis de Newton | Física em movimento</title>
-    <link rel="stylesheet" href="style.css?v=tabela-newton">
-</head>
-<body>
-    <header class="site-header">
-        <div class="header-inner">
-            <a href="index.html" class="logo">Física <span>em movimento</span></a>
-            <nav aria-label="Navegação principal">
-                <ul>
-                    <li><a href="index.html" aria-current="page">Início</a></li>
-                    <li><a href="lei1.html">1ª Lei</a></li>
-                    <li><a href="lei2.html">2ª Lei</a></li>
-                    <li><a href="lei3.html">3ª Lei</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <script>
+    (function () {
+        "use strict";
+        var form = document.getElementById("newton-quiz");
+        if (!form) { return; }
+        var questions = Array.prototype.slice.call(form.querySelectorAll(".home-quiz-question"));
+        var progressBar = document.getElementById("quiz-progress-bar");
+        var progressLabel = document.getElementById("quiz-progress-label");
+        var result = document.getElementById("quiz-result");
+        var scoreOut = document.getElementById("quiz-score");
+        var messageOut = document.getElementById("quiz-message");
+        var retake = document.getElementById("quiz-retake");
+        var CHECK = "✓";  // ✓
+        var CROSS = "✕"; // ✕
 
-    <main class="container home-main">
-        <section class="introduction" aria-labelledby="intro-title">
-            <p class="eyebrow">Mecânica clássica · Século XVII</p>
-            <h1 id="intro-title">Por que as coisas <span>se movem?</span></h1>
-            <p class="lead">Do chute em uma bola à viagem de um foguete, o movimento segue regras que podemos observar e compreender. As três leis de Newton são um dos pontos de partida para explicar essas mudanças.</p>
-            <p>Elas descrevem como forças e movimento se relacionam: quando um objeto mantém seu estado, como uma força altera sua velocidade e por que toda interação envolve dois corpos.</p>
-        </section>
+        var correctCount = function () {
+            return questions.filter(function (fs) {
+                var chosen = fs.querySelector("input[type=radio]:checked");
+                return chosen && chosen.value === fs.dataset.answer;
+            }).length;
+        };
 
-        <section class="home-examples" aria-labelledby="newton-action-title">
-            <div class="section-heading">
-                <p class="eyebrow">Da teoria à prática</p>
-                <h2 id="newton-action-title">Newton em ação</h2>
-            </div>
-            <p class="home-examples-intro">Do campo de futebol ao espaço, as mesmas leis ajudam a explicar o movimento.</p>
-            <div class="home-examples-grid">
-                <article class="home-example" aria-labelledby="football-example-title">
-                    <figure class="home-example-photo">
-                        <img src="img/newton-futebol.jpg" width="1280" height="720"
-                             alt="Pé de um jogador em contato com uma bola durante um chute em um campo de futebol."
-                             loading="lazy" decoding="async">
-                        <figcaption>Foto: <a href="https://www.pexels.com/photo/soccer-player-kicking-white-gray-soccer-ball-on-green-grass-field-50713/" target="_blank" rel="noopener noreferrer">Pixabay / Pexels</a></figcaption>
-                    </figure>
-                    <div class="home-example-content">
-                        <p class="eyebrow">2ª lei · Força e movimento</p>
-                        <h3 id="football-example-title">Como uma força muda o movimento?</h3>
-                        <p class="home-example-description">Durante o chute, o pé exerce uma força sobre a bola e altera sua velocidade. É uma situação cotidiana que ajuda a compreender a segunda lei de Newton.</p>
-                        <a href="lei2.html" class="text-link">Explorar a segunda lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </article>
-                <article class="home-example" aria-labelledby="rocket-example-title">
-                    <figure class="home-example-photo">
-                        <img src="img/newton-foguete.jpg" width="1280" height="720"
-                             alt="Foguete da missão Artemis I subindo à noite, com uma coluna luminosa de gases abaixo dele."
-                             loading="lazy" decoding="async">
-                        <figcaption>Artemis I · Foto: <a href="https://images.nasa.gov/details/NHQ202211160006" target="_blank" rel="noopener noreferrer">NASA / Joel Kowsky</a></figcaption>
-                    </figure>
-                    <div class="home-example-content">
-                        <p class="eyebrow">3ª lei · Ação e reação</p>
-                        <h3 id="rocket-example-title">Por que o foguete sobe?</h3>
-                        <p class="home-example-description">O foguete empurra os gases para baixo e recebe deles uma força para cima. O par atua em corpos diferentes: ação e reação. Para decolar, a propulsão deve superar o peso.</p>
-                        <a href="lei3.html" class="text-link">Explorar a terceira lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </article>
-            </div>
-        </section>
+        var updateProgress = function () {
+            var answered = questions.filter(function (fs) { return fs.dataset.locked === "true"; }).length;
+            progressBar.style.width = (answered / questions.length * 100) + "%";
+            progressLabel.textContent = answered + " de " + questions.length + " respondidas";
+            if (answered === questions.length) {
+                var score = correctCount();
+                scoreOut.textContent = String(score);
+                var message;
+                if (score === 5) {
+                    message = "Gabarito perfeito! Você entendeu as três leis de Newton.";
+                } else if (score >= 3) {
+                    message = "Muito bem! Uma revisada rápida nas que escaparam e você fecha o tema com chave de ouro. <a class=\"text-link\" href=\"#laws-title\">Ver as três leis <span aria-hidden=\"true\">→</span></a>";
+                } else {
+                    message = "Sem drama: que tal ver as três leis lado a lado e tentar de novo? <a class=\"text-link\" href=\"#laws-title\">Ver as três leis <span aria-hidden=\"true\">→</span></a>";
+                }
+                messageOut.innerHTML = message;
+                result.hidden = false;
+                result.focus();
+            }
+        };
 
-        <section class="laws-section" aria-labelledby="laws-title">
-            <div class="section-heading">
-                <p class="eyebrow">Um mapa do movimento</p>
-                <h2 id="laws-title">As três leis</h2>
-            </div>
-            <p class="laws-table-hint" id="laws-table-hint">Em telas pequenas, deslize a tabela para o lado. Pelo teclado, foque a tabela e use as setas.</p>
-            <div class="laws-table-scroll" role="region" aria-labelledby="laws-table-caption" aria-describedby="laws-table-hint" tabindex="0">
-                <table class="laws-comparison">
-                    <caption id="laws-table-caption">Comparação das três leis de Newton</caption>
-                    <colgroup>
-                        <col class="laws-col-name">
-                        <col class="laws-col-idea">
-                        <col class="laws-col-math">
-                        <col class="laws-col-example">
-                    </colgroup>
-                    <thead>
-                        <tr>
-                            <th scope="col">Lei</th>
-                            <th scope="col">Ideia principal</th>
-                            <th scope="col" class="laws-math-heading">Relação matemática</th>
-                            <th scope="col">Exemplo</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">
-                                <a class="laws-table-link" href="lei1.html">
-                                    <span class="laws-table-number">1ª lei</span>
-                                    <span class="laws-table-name">Inércia</span>
-                                </a>
-                            </th>
-                            <td>Com força resultante nula, o corpo permanece em repouso ou em movimento retilíneo uniforme.</td>
-                            <td class="laws-math-cell">
-                                <span class="laws-equation" role="math" aria-label="Força resultante igual a zero">ΣF = 0</span>
-                                <span class="laws-equation-detail">a = 0 · v constante</span>
-                            </td>
-                            <td>Um livro sobre a mesa permanece em repouso quando peso e força normal se equilibram.</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a class="laws-table-link" href="lei2.html">
-                                    <span class="laws-table-number">2ª lei</span>
-                                    <span class="laws-table-name">Princípio fundamental</span>
-                                </a>
-                            </th>
-                            <td>A força resultante produz aceleração. Para uma mesma força resultante, quanto maior a massa, menor a aceleração.</td>
-                            <td class="laws-math-cell">
-                                <span class="laws-equation" role="math" aria-label="Força resultante igual à massa vezes a aceleração">ΣF = m · a</span>
-                            </td>
-                            <td>Uma força resultante de 10 N em um carrinho de 2 kg produz uma aceleração de 5 m/s².</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">
-                                <a class="laws-table-link" href="lei3.html">
-                                    <span class="laws-table-number">3ª lei</span>
-                                    <span class="laws-table-name">Ação e reação</span>
-                                </a>
-                            </th>
-                            <td>A interação gera forças simultâneas, de mesma intensidade e sentidos opostos, que atuam em corpos diferentes.</td>
-                            <td class="laws-math-cell">
-                                <span class="laws-equation" role="math" aria-label="Força de A sobre B igual ao oposto da força de B sobre A">F<sub>A→B</sub> = −F<sub>B→A</sub></span>
-                            </td>
-                            <td>Ao caminhar, o pé empurra o chão para trás e o chão exerce uma força para a frente sobre o pé.</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="laws-table-note">ΣF é a força resultante. As relações são vetoriais e consideram um referencial inercial; na 2ª lei, a massa é constante. A→B indica a força de A sobre B, e o sinal − representa sentidos opostos.</p>
-        </section>
+        questions.forEach(function (fs) {
+            fs.addEventListener("change", function () {
+                if (fs.dataset.locked === "true") { return; }
+                var chosen = fs.querySelector("input[type=radio]:checked");
+                if (!chosen) { return; }
+                fs.dataset.locked = "true";
+                var answer = fs.dataset.answer;
+                var ok = chosen.value === answer;
+                fs.querySelectorAll("input[type=radio]").forEach(function (input) {
+                    input.disabled = true;
+                    var label = input.closest(".home-quiz-option");
+                    if (input.value === answer) { label.classList.add("is-correct"); }
+                });
+                if (!ok) { chosen.closest(".home-quiz-option").classList.add("is-wrong"); }
+                var feedback = fs.querySelector(".home-quiz-feedback");
+                if (!feedback.dataset.original) { feedback.dataset.original = feedback.textContent; }
+                var head = ok
+                    ? "<span class=\"home-quiz-feedback-head home-quiz-feedback-head--ok\">" + CHECK + " Correto!</span> "
+                    : "<span class=\"home-quiz-feedback-head home-quiz-feedback-head--err\">" + CROSS + " Não foi dessa vez.</span> ";
+                feedback.innerHTML = head + "<span>" + feedback.dataset.original + "</span>";
+                feedback.classList.toggle("is-wrong", !ok);
+                feedback.hidden = false;
+                updateProgress();
+            });
+        });
 
-        <section class="newton-section" aria-labelledby="newton-title">
-            <figure class="newton-portrait">
-                <img src="img/isaac-newton.jpg" alt="Retrato de Isaac Newton, pintado por Godfrey Kneller em 1689.">
-                <figcaption>Retrato de 1689 · <a href="https://commons.wikimedia.org/wiki/File:GodfreyKneller-IsaacNewton-1689.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons</a></figcaption>
-            </figure>
-            <div>
-                <p class="eyebrow">O cientista por trás das leis</p>
-                <h2 id="newton-title">Quem foi Isaac Newton?</h2>
-                <p>Isaac Newton (1643–1727) foi um físico e matemático inglês. Em sua obra <em>Princípios Matemáticos da Filosofia Natural</em>, publicada em 1687, apresentou as leis do movimento e a lei da gravitação universal.</p>
-                <p>Essas ideias ajudaram a explicar fenômenos terrestres e celestes com os mesmos princípios. Seu trabalho tornou-se uma base importante da física clássica e ainda é usado para descrever muitos movimentos do cotidiano.</p>
-            </div>
-        </section>
-
-        <section class="home-faq" id="duvidas-comuns" aria-labelledby="faq-title">
-            <div class="section-heading">
-                <p class="eyebrow">Para não confundir</p>
-                <h2 id="faq-title">Dúvidas comuns</h2>
-            </div>
-            <p class="home-faq-intro">Abra uma pergunta para entender melhor as ideias por trás das três leis.</p>
-            <div class="home-faq-list">
-                <details class="home-faq-item">
-                    <summary>
-                        <span>Se um objeto está parado, não existem forças sobre ele?</span>
-                        <span class="home-faq-symbol" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>Não necessariamente. Um livro apoiado numa mesa sofre o peso para baixo e a força normal da mesa para cima. Quando essas forças se equilibram, a <strong>força resultante é nula</strong> e o livro permanece em repouso.</p>
-                        <a class="text-link" href="lei1.html">Revisar a primeira lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>
-                        <span>Massa e peso são a mesma coisa?</span>
-                        <span class="home-faq-symbol" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>Não. A massa está relacionada à inércia do corpo e é medida em <strong>quilogramas (kg)</strong>. O peso é a força gravitacional sobre ele, medida em <strong>newtons (N)</strong>. Seu valor depende da gravidade local: <strong class="home-faq-equation">P = m · g</strong>.</p>
-                        <a class="text-link" href="lei2.html">Revisar força, massa e aceleração <span aria-hidden="true">→</span></a>
-                    </div>
-                </details>
-                <details class="home-faq-item">
-                    <summary>
-                        <span>Por que ação e reação não se anulam?</span>
-                        <span class="home-faq-symbol" aria-hidden="true"></span>
-                    </summary>
-                    <div class="home-faq-answer">
-                        <p>Elas não se anulam sobre um mesmo corpo, pois atuam em <strong>corpos diferentes</strong>. Ao empurrar um carrinho, suas mãos exercem uma força nele, enquanto o carrinho exerce uma força de mesma intensidade e sentido oposto nas suas mãos.</p>
-                        <p>Já o peso e a força normal sobre um mesmo livro não formam um par de ação e reação.</p>
-                        <a class="text-link" href="lei3.html">Revisar a terceira lei <span aria-hidden="true">→</span></a>
-                    </div>
-                </details>
-            </div>
-        </section>
-
-        <section class="home-project" id="sobre-projeto" aria-labelledby="project-title">
-            <div class="section-heading">
-                <p class="eyebrow">Autoria e propósito</p>
-                <h2 id="project-title">Sobre o projeto e referências</h2>
-            </div>
-            <div class="home-project-grid">
-                <div class="home-project-info">
-                    <h3>Objetivo</h3>
-                    <p>Este projeto reúne explicações, vídeos de experiências e simulações interativas para explorar as três leis de Newton. A proposta é aproximar os conceitos de força e movimento de situações do cotidiano e incentivar o aprendizado pela observação.</p>
-                    <h3 class="home-project-team-title" id="project-team-title">Integrantes</h3>
-                    <ul class="home-project-authors" aria-labelledby="project-team-title">
-                        <li>Arthur Zanetti</li>
-                        <li>Igor Adão</li>
-                        <li>Felipe Boroski</li>
-                    </ul>
-                </div>
-                <div class="home-project-reading">
-                    <h3>Leituras para aprofundar</h3>
-                    <p class="home-project-reading-intro">Referências para revisar os conceitos. Os links abrem em uma nova aba.</p>
-                    <ul class="home-project-references">
-                        <li>
-                            <a href="https://brasilescola.uol.com.br/fisica/leis-newton.htm" target="_blank" rel="noopener noreferrer" aria-label="Leis de Newton — Brasil Escola (abre em nova aba)">Leis de Newton <span aria-hidden="true">↗</span></a>
-                            <p>Brasil Escola · Enunciados e exemplos, em português.</p>
-                        </li>
-                        <li>
-                            <a href="https://www1.grc.nasa.gov/beginners-guide-to-aeronautics/newtons-laws-of-motion/" target="_blank" rel="noopener noreferrer" aria-label="Newton’s Laws of Motion — NASA (em inglês; abre em nova aba)"><span lang="en">Newton’s Laws of Motion</span> <span aria-hidden="true">↗</span></a>
-                            <p>NASA Glenn Research Center · Leis do movimento e aplicações, em inglês.</p>
-                        </li>
-                        <li>
-                            <a href="https://openstax.org/books/university-physics-volume-1/pages/5-4-mass-and-weight" target="_blank" rel="noopener noreferrer" aria-label="Mass and Weight — OpenStax (em inglês; abre em nova aba)"><span lang="en">Mass and Weight</span> <span aria-hidden="true">↗</span></a>
-                            <p>OpenStax · Massa e peso, seção 5.4 de <em lang="en">University Physics Volume 1</em>, em inglês.</p>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <footer class="site-footer">
-        <div class="footer-inner">
-            <p>Leis de Newton <span>·</span> Um estudo sobre movimento e forças</p>
-            <a href="#intro-title">Voltar ao início ↑</a>
-        </div>
-    </footer>
-<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a599b1f77fdadaba',t:'MTc5NDUzMDExMw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a599b1f77fdadaba',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+        retake.addEventListener("click", function () {
+            questions.forEach(function (fs) {
+                delete fs.dataset.locked;
+                fs.querySelectorAll("input[type=radio]").forEach(function (input) {
+                    input.disabled = false;
+                    input.checked = false;
+                });
+                fs.querySelectorAll(".home-quiz-option").forEach(function (label) {
+                    label.classList.remove("is-correct", "is-wrong");
+                });
+                var feedback = fs.querySelector(".home-quiz-feedback");
+                if (feedback.dataset.original) { feedback.textContent = feedback.dataset.original; }
+                feedback.classList.remove("is-wrong");
+                feedback.hidden = true;
+            });
+            result.hidden = true;
+            progressBar.style.width = "0%";
+            progressLabel.textContent = "0 de " + questions.length + " respondidas";
+            var first = questions[0] && questions[0].querySelector("input[type=radio]");
+            if (first) { first.focus(); }
+        });
+    }());
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||(a.contentWindow&&a.contentWindow.document);if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'a59f14f8ae3ef1ea',t:'MTc5NDU4NjU5Nw=='};var l=window.parent.location,o;try{o=new URL(l.origin).origin}catch(e){try{o=new URL(new URL(l.href).origin).origin}catch(e){o=''}}var u='/cdn-cgi/challenge-platform/scripts/jsd/main.js?ray=a59f14f8ae3ef1ea',a=document.createElement('script');a.src=o?new URL(u,o).href:u;document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
