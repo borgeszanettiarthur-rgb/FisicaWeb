@@ -1341,3 +1341,96 @@ a:focus-visible {
 @media (max-width: 850px) {
     .laws-table-hint { display: block; }
 }
+/* Dúvidas comuns (página inicial): figura interativa dentro de cada resposta. */
+.faq-figure {
+    margin: 14px 0 4px;
+    padding: 14px 14px 10px;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: #fbfaf5;
+}
+.faq-figure svg {
+    display: block;
+    width: 100%;
+    max-width: 440px;
+    height: auto;
+    margin: 0 auto;
+}
+.faq-figure figcaption {
+    max-width: 460px;
+    margin: 10px auto 2px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Animações suaves das figuras das dúvidas comuns. */
+.faq-arrow-up {
+    animation: faq-arrow-pulse-up 2.4s ease-in-out infinite alternate;
+}
+.faq-arrow-down {
+    animation: faq-arrow-pulse-down 2.4s ease-in-out infinite alternate;
+}
+@keyframes faq-arrow-pulse-up {
+    from { transform: translateY(3px); }
+    to { transform: translateY(-4px); }
+}
+@keyframes faq-arrow-pulse-down {
+    from { transform: translateY(-3px); }
+    to { transform: translateY(4px); }
+}
+
+/* Queda livre comparada Terra x Lua: balanço suave, ritmo diferente. */
+.faq-bob-earth {
+    animation: faq-bob 1.7s ease-in-out infinite alternate;
+}
+.faq-bob-moon {
+    animation: faq-bob 2.7s ease-in-out infinite alternate;
+}
+@keyframes faq-bob {
+    from { transform: translateY(2px); }
+    to { transform: translateY(-5px); }
+}
+
+/* Ação e reação: os dois corpos se afastam a partir do contato. */
+.faq-push-person {
+    animation: faq-push-person 3.6s ease-in-out infinite;
+}
+.faq-push-cart {
+    animation: faq-push-cart 3.6s ease-in-out infinite;
+}
+.faq-push-forces {
+    animation: faq-push-forces 3.6s ease-in-out infinite;
+}
+@keyframes faq-push-cart {
+    0%, 18% { transform: translateX(0); opacity: 1; }
+    58% { transform: translateX(74px); opacity: 1; }
+    68% { transform: translateX(74px); opacity: 0; }
+    74% { transform: translateX(0); opacity: 0; }
+    84%, 100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes faq-push-person {
+    0%, 18% { transform: translateX(0); opacity: 1; }
+    58% { transform: translateX(-46px); opacity: 1; }
+    68% { transform: translateX(-46px); opacity: 0; }
+    74% { transform: translateX(0); opacity: 0; }
+    84%, 100% { transform: translateX(0); opacity: 1; }
+}
+@keyframes faq-push-forces {
+    0%, 45% { opacity: 1; }
+    58%, 100% { opacity: 0; }
+}
+
+/* Respeita quem prefere movimento reduzido: figuras ficam estáticas. */
+@media (prefers-reduced-motion: reduce) {
+    .faq-arrow-up,
+    .faq-arrow-down,
+    .faq-bob-earth,
+    .faq-bob-moon,
+    .faq-push-person,
+    .faq-push-cart,
+    .faq-push-forces {
+        animation: none !important;
+    }
+}
