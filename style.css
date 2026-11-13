@@ -1226,3 +1226,118 @@ a:focus-visible {
         border-top: 1px solid var(--line);
     }
 }
+
+/* Resumo das leis em tabela HTML: dados comparáveis, sem depender de JavaScript. */
+.laws-table-hint {
+    display: none;
+    margin: -4px 0 14px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+.laws-table-scroll {
+    max-width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    background: var(--surface);
+    overscroll-behavior-x: contain;
+    -webkit-overflow-scrolling: touch;
+}
+.laws-table-scroll:focus-visible,
+.laws-table-link:focus-visible {
+    outline: 3px solid #b85d3c;
+    outline-offset: 3px;
+}
+.laws-comparison {
+    width: 100%;
+    min-width: 800px;
+    border-collapse: collapse;
+    table-layout: fixed;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.6;
+}
+.laws-comparison caption {
+    padding: 12px 16px;
+    color: var(--green-dark);
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+}
+.laws-col-name { width: 20%; }
+.laws-col-idea { width: 30%; }
+.laws-col-math { width: 22%; }
+.laws-col-example { width: 28%; }
+.laws-comparison th,
+.laws-comparison td {
+    padding: 16px;
+    vertical-align: top;
+    text-align: left;
+}
+.laws-comparison thead th {
+    padding: 13px 16px;
+    background: var(--green-dark);
+    color: var(--surface);
+    font-size: 13px;
+    font-weight: 700;
+}
+.laws-comparison thead th + th { border-left: 1px solid #41685d; }
+.laws-comparison tbody th,
+.laws-comparison tbody td { border-top: 1px solid var(--line); }
+.laws-comparison tbody td { border-left: 1px solid var(--line); }
+.laws-comparison tbody th { background: #eef3ed; font-weight: 400; }
+.laws-comparison tbody tr:nth-child(even) td { background: #f7f8f2; }
+.laws-table-link {
+    display: block;
+    min-height: 44px;
+    padding: 3px 0;
+    color: var(--green);
+    text-decoration: none;
+}
+.laws-table-number {
+    display: block;
+    margin-bottom: 5px;
+    color: #9f4c30;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+.laws-table-name {
+    display: block;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 20px;
+    line-height: 1.25;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 4px;
+}
+.laws-table-link:hover .laws-table-name { color: var(--green-dark); }
+.laws-comparison .laws-math-heading,
+.laws-comparison .laws-math-cell { text-align: center; }
+.laws-comparison .laws-math-cell { vertical-align: middle; }
+.laws-equation {
+    display: block;
+    color: var(--green-dark);
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 19px;
+    line-height: 1.5;
+    white-space: nowrap;
+}
+.laws-equation sub { font-size: 65%; }
+.laws-equation-detail {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 12px;
+}
+.laws-table-note {
+    margin-top: 13px;
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+}
+@media (max-width: 850px) {
+    .laws-table-hint { display: block; }
+}
